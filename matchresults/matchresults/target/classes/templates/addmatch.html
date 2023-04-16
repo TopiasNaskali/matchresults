@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Match</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <a href="/matchlist"> Matchlist </a>
+    <h1>Add Match</h1>
+    
+    <form th:object="${match}" th:action="@{/save}" method="post">
+        <label for="homeName">Home Team</label>
+        <input type="text" id="homeName" th:field="*{homeName}"/>
+        
+        <label for="homeGoals">Goals</label>
+        <input type="text" id="homeGoals" th:field="*{homeGoals}"/>
+        
+        <label for="awayName">Away Team</label>
+        <input type="text" id="awayName" th:field="*{awayName}"/>
+
+        <label for="awayGoals">Goals</label>
+        <input type="text" id="awayGoals" th:field="*{awayGoals}"/>
+        
+        <label for="referee">Referee</label>
+        <select id="referee" name="referee.refereeId" class="form-control">
+            <option th:each="referee : ${referees}" th:value="${referee.refereeId}" th:text="${referee.name}"></option>
+        </select>
+
+        <input type="submit" value="Save"/>
+    </form>
+    <h4>Did you not find the right referee for your match?</h4>
+    <p>Add a new referee here</p>
+    <a href="/addreferee">Add referees</a>
+</body>
+</html>

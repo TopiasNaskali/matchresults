@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Match Results</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	</head>
+
+	<body>
+		<h1>Football Match Results</h1>
+		<div>
+			<tr>
+				<br>
+				<th>Welcome</th>
+				<th sec:authentication="name"> </th>
+				<th>your role is </th>
+				<th sec:authentication="principal.authorities"></th>
+				
+			</tr>
+		</div>
+		<br>
+		<a href="/add">Add match</a>
+		<br> <br>
+		<a href="/refereelist">Referees</a>
+		<!--<a href="/users">Users</a>-->
+		
+		
+		
+		<div>
+			<br>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out"/>
+			</form>
+			<br>
+		</div>
+
+			<table>
+				<tr>
+					<th>Home Team</th>
+					<th>Goals</th>
+					<th>Away Team</th>
+					<th>Goals</th>
+					<th>Referee</th>
+					<th>Result</th>
+				</tr>
+			<tbody>
+				<tr th:each = "match : ${matches}">
+					<td th:text="${match.homeName}"></td>
+					<td th:text="${match.homeGoals}"></td>
+					<td th:text="${match.awayName}"></td>
+                    <td th:text="${match.awayGoals}"></td>
+					<td th:text="${match.referee.name}"></td>
+					<td>
+						<p th:if="${match.homeGoals > match.awayGoals}">
+							<span th:text="${match.homeName} + ' won the match'"></span>
+						</p>
+						<p th:if="${match.homeGoals < match.awayGoals}">
+							<span th:text="${match.awayName} + ' won the match'"></span>
+						</p>
+						<p th:if="${match.homeGoals == match.awayGoals}">
+							<span>Draw</span>
+						</p>
+					</td>
+					
+
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{matchId}(matchId=${match.matchId})}">Delete</a></td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{matchId}(matchId=${match.matchId})}">Edit</a></td> 
+					
+				</tr>
+			</tbody>
+		</table>
+		
+	</body>
+
+</html>

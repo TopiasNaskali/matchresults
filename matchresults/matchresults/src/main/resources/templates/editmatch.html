@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Match</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Edit Match</h1>
+    <div>
+        <form th:object="${match}" th:action="@{../save}" action="#" method="post">
+            <input type="hidden" th:field="*{matchId}">
+            <label for="homeName">Home Team</label>
+            <input type="text" id="homeName" th:field="*{homeName}"/>
+            
+            <label for="homeGoals">Goals</label>
+            <input type="text" id="homeGoals" th:field="*{homeGoals}"/>
+            
+            <label for="awayName">Away Team</label>
+            <input type="text" id="awayName" th:field="*{awayName}"/>
+    
+            <label for="awayGoals">Goals</label>
+            <input type="text" id="awayGoals" th:field="*{awayGoals}"/>
+            
+            <label for="referee">Referee</label>
+            <select id="referee" name="referee.refereeId" class="form-control">
+                <option th:each="referee : ${referees}" th:value="${referee.refereeId}" th:text="${referee.name}"></option>
+            </select>
+    
+            <input type="submit" value="Save"/>
+        </form>
+  	
+    </div> 	
+</body>
+</html>

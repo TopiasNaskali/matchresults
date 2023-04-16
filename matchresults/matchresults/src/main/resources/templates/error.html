@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Action prevented</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1>Action prevented</h1>
+  
+    <p>Referee cannot be deleted, because he/she has refereed matches in the system.</p>
+    <p th:text=" 'Referee ' + ${matches[0].referee.name} + ' has ' + ${matches.size()} + ' matches in the system:'"></p>
+    <a href="/refereelist">Back to referees</a> <br> <br>
+    <table>
+        <tr>
+            <th>Home Team</th>
+            <th>Goals</th>
+            <th>Away Team</th>
+            <th>Goals</th>
+            <th>Result</th>
+            <th>Referee</th>
+            
+            
+        </tr>
+        <tbody>
+            <tr th:each = "match : ${matches}">
+                <td th:text="${match.homeName}"></td>
+                <td th:text="${match.homeGoals}"></td>
+                <td th:text="${match.awayName}"></td>
+                <td th:text="${match.awayGoals}"></td>
+                <td>
+                    <p th:if="${match.homeGoals > match.awayGoals}">
+                        <span th:text="${match.homeName} + ' won the match'"></span>
+                    </p>
+                    <p th:if="${match.homeGoals < match.awayGoals}">
+                        <span th:text="${match.awayName} + ' won the match'"></span>
+                    </p>
+                    <p th:if="${match.homeGoals == match.awayGoals}">
+                        <span>Draw</span>
+                    </p>
+                </td>
+                <td th:text="${match.referee.name}"></td>
+               
+        </tbody>
+    </table>  
+</body>
+</html>

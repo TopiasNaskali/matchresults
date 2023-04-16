@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit referee</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <a href="/matchlist">Matches</a>
+    <h1>Edit referee</h1>
+    
+
+    <form th:object="${referee}" th:action="@{/savereferee}" method="post">
+        <input type="hidden" th:field="*{refereeId}" />
+        <label for="name">Referee name</label>
+        <input type="text" id="name" th:field="*{name}"/>
+        
+        <input type="submit" value="Save"/>
+    </form>
+    
+</body>
+</html>
